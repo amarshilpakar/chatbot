@@ -1,4 +1,5 @@
-var{assign:a}=Object,e='<span class="material-symbols-outlined upload-file" id="attach_file">attach_file</span><input hidden type="file" id="file-upload">';var b=`<style>
+
+    const style = `<style>
     /* Import Google font - Poppins */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
@@ -432,7 +433,11 @@ var{assign:a}=Object,e='<span class="material-symbols-outlined upload-file" id="
           white-space: nowrap;
           word-wrap: break-word !important;
         }
-    </style>`;var c=`outline:none !important;visibility:visible !important;resize:none !important;box-shadow:none !important;overflow:visible !important;background:none !important;opacity:1 !important;filter:alpha(opacity=100) !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;-mz-opacity:1 !important;-khtml-opacity:1 !important; top:auto !important;right:20px !important;bottom:20px !important; left:auto !important; position:fixed !important; border:0 !important; min-height: 20px !important; min-width: 24px !important; max-height: 600px !important; max-width: 500px !important; padding:0 !important; margin:0 !important;-moz-transition-property:none !important;-webkit-transition-property:none !important;-o-transition-property:none !important; transition-property:none !important; transform:none !important;-webkit-transform:none !important;-ms-transform:none !important; width: 600px !important; height: 600px !important; display:block !important; z-index:1000001 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;`;var d=`<button class='chat-input-action' id='emoji-button'></button>`;var f=`<div class="chatbot"><header><h2>Chatbot</h2>
+    </style>`
+    const iframeStyle = `outline:none !important;visibility:visible !important;resize:none !important;box-shadow:none !important;overflow:visible !important;background:none !important;opacity:1 !important;filter:alpha(opacity=100) !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;-mz-opacity:1 !important;-khtml-opacity:1 !important; top:auto !important;right:20px !important;bottom:20px !important; left:auto !important; position:fixed !important; border:0 !important; min-height: 20px !important; min-width: 24px !important; max-height: 600px !important; max-width: 500px !important; padding:0 !important; margin:0 !important;-moz-transition-property:none !important;-webkit-transition-property:none !important;-o-transition-property:none !important; transition-property:none !important; transform:none !important;-webkit-transform:none !important;-ms-transform:none !important; width: 600px !important; height: 600px !important; display:block !important; z-index:1000001 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;`;
+    const emojiButton = `<button class='chat-input-action' id='emoji-button'></button>`;
+    const fileUploadButton = '<span class="material-symbols-outlined upload-file" id="attach_file">attach_file</span><input hidden type="file" id="file-upload">';
+    const body = `<div class="chatbot"><header><h2>Chatbot</h2>
       <span class="close-btn material-symbols-outlined">close</span>
     </header>
     <ul class="chat-box">
@@ -442,10 +447,59 @@ var{assign:a}=Object,e='<span class="material-symbols-outlined upload-file" id="
       </li>
     </ul>
     <div class="chat-box-input">
-        ${d}
-        ${e}
+        ${emojiButton}
+        ${fileUploadButton}
       <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
       <span id="send-btn" class="material-symbols-rounded">send</span>
     </div>
-  </div>`;function g(C){this.apiKey=C}a(g.prototype,{activateChatBot(){var A=document.createElement('iframe'),_=this.apiKey?`?api_key=${this.apiKey}"`:'';A.setAttribute('style',c);A.id='chat-bot-frame';A.srcdoc=`<head>${b}<script src="lib/emoji-picker.min.js"></script><script src="lib/chatbot-core.min.js${_}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" /></head><button class="chat-bot-activate"><span class="material-symbols-rounded">mode_comment</span><span class="material-symbols-outlined">close</span></button>${f}`;document.body.append(A)},removeChatBot(){var B=document.getElementById('chat-bot-frame');B.remove()}});var h=new g('', '');window.activateChatWindow=()=>h.activateChatBot();window.removeChatWindow=()=>h.removeChatBot();(()=>window.addEventListener('DOMContentLoaded',()=>{var _a=document.getElementsByTagName('script');for(const _A of _a){var _b=_A.src;if(_b.includes('chatbot.min.js')){var _c=new URL(_b);var D=_c.searchParams.get('mode');D=='auto'&&h.activateChatBot()}}}))();
+  </div>`;
+ 
+const chatPrototype = {
+    activateChatBot(){
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('style',iframeStyle);
+        iframe.id='chat-bot-frame';
+        const params = this.apiKey ? `?api_key=${this.apiKey}"`: '';
+        iframe.srcdoc = `<head>${style}<script src="lib/emoji-picker.min.js"></script><script src="lib/chatbot-core.min.js${params}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" /></head><button class="chat-bot-activate"><span class="material-symbols-rounded">mode_comment</span><span class="material-symbols-outlined">close</span></button>${body}`;
+        document.body.append(iframe);
+    },
+    removeChatBot(){
+      const iframe = document.getElementById('chat-bot-frame');
+      iframe.remove();
+    }
+}
+
+
+function Chat(api_key){
+    this.apiKey = api_key;
+}
+
+Object.assign(Chat.prototype, chatPrototype);
+
+const chatWindow = new Chat('','');
+
+window.activateChatWindow = ()=>{
+  chatWindow.activateChatBot();
+}
+
+window.removeChatWindow = ()=>{
+  chatWindow.removeChatBot();
+}
+
+(()=>{
+    window.addEventListener('DOMContentLoaded', () => {
+        const scripts = document.getElementsByTagName('script');
+        for(const script of scripts){
+            const src = script.src;
+            if(src.includes('chatbot.min.js')){
+                const url = new URL(src);
+                const apiKey = url.searchParams.get('api_key');
+                const chatMode = url.searchParams.get('mode');
+                if(chatMode === 'auto'){
+                    chatWindow.activateChatBot();
+                }
+            }
+        }
+    });
+})()
