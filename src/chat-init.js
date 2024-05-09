@@ -180,7 +180,7 @@
           right: 35px;
           bottom: 90px;
           width: 420px;
-          background: var(--xa-white);
+          background: var(--xa-white-light);
           border-radius: 15px;
           overflow: hidden;
           opacity: 0;
@@ -258,7 +258,7 @@
           padding: 12px 16px;
           border-radius: 10px 10px 0 10px;
           max-width: 75%;
-          color: #fff;
+          color: var(--xa-white);
           font-size: 0.95rem;
           background: var(--xa-primary);
         }
@@ -267,7 +267,7 @@
         }
         .chat-box .chat p.error {
           color: var(--xa-red);
-          background: var(--xa-gray);
+          background: var(--xa-mild-bold-gray);
         }
         .chat-box .incoming p {
           color: var(--xa-black);
@@ -279,7 +279,7 @@
           position: absolute;
           bottom: 0;
           width: 100%;
-          background: var(--xa-white);
+          background: var(--xa-white-light);
           padding: 3px 20px;
           border-top: 1px solid var(--xa-lighter-gray);
         }
@@ -292,6 +292,8 @@
           max-height: 180px;
           padding: 15px 15px 15px 0;
           font-size: 0.95rem;
+          background:inherit;
+          color:var(--xa-black);
         }
         .chat-box-input span:not(.upload-file) {
           align-self: flex-end;
@@ -320,6 +322,9 @@
           margin-top: 4px;
         }
 
+        .chat-input-action .svg-inline--fa path{
+          fill:var(--xa-black);
+        }
 
         @media (max-width: 490px) {
           .chat-bot-activate {
@@ -433,6 +438,10 @@
           white-space: nowrap;
           word-wrap: break-word !important;
         }
+
+        .material-symbols-outlined{
+          color:var(--xa-black);
+        }
     </style>`
     const iframeStyle = `outline:none !important;visibility:visible !important;resize:none !important;box-shadow:none !important;overflow:visible !important;background:none !important;opacity:1 !important;filter:alpha(opacity=100) !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;-mz-opacity:1 !important;-khtml-opacity:1 !important; top:auto !important;right:20px !important;bottom:20px !important; left:auto !important; position:fixed !important; border:0 !important; min-height: 20px !important; min-width: 24px !important; max-height: 600px !important; max-width: 500px !important; padding:0 !important; margin:0 !important;-moz-transition-property:none !important;-webkit-transition-property:none !important;-o-transition-property:none !important; transition-property:none !important; transform:none !important;-webkit-transform:none !important;-ms-transform:none !important; width: 600px !important; height: 600px !important; display:block !important; z-index:1000001 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;`;
     const emojiButton = `<button class='chat-input-action' id='emoji-button'></button>`;
@@ -485,6 +494,13 @@ window.activateChatWindow = ()=>{
 
 window.removeChatWindow = ()=>{
   chatWindow.removeChatBot();
+}
+
+window.updateChatBoxColor = (colorMapping) =>{
+  const keys = Object.keys(colorMapping);
+  for(const key of keys){
+    document.getElementById("chat-bot-frame").contentWindow.document.documentElement.style.setProperty(`--${key}`, colorMapping[key]);
+  }
 }
 
 (()=>{
