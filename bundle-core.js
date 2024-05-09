@@ -1,7 +1,7 @@
 const concat = require('concat');
 (async function build() {
     const files = [
-        './src/chat-init.js'
+        './src/script.js'
     ]
-    await concat(files, './lib/chatbot.js');
+    await concat(files, './lib/chatbot-core.js');
 })()

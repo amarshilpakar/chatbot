@@ -4,7 +4,8 @@
   "description": "",
   "main": "bundle.js",
   "scripts": {
-    "build": "node bundle.js && minify ./lib/chatbot.js > ./lib/chatbot.min.js "
+    "build-core": "node bundle-core.js && minify ./lib/chatbot-core.js > ./lib/chatbot-core.min.js",
+    "build": "node bundle.js && minify ./lib/chatbot.js > ./lib/chatbot.min.js"
   },
   "dependencies": {
     "concat": "1.0.3",
