@@ -460,7 +460,7 @@ const chatPrototype = {
         iframe.setAttribute('style',iframeStyle);
         iframe.id='chat-bot-frame';
         const params = this.apiKey ? `?api_key=${this.apiKey}"`: '';
-        iframe.srcdoc = `<head>${style}<script src="lib/emoji-picker.min.js"></script><script src="lib/chatbot-core.min.js${params}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
+        iframe.srcdoc = `<head>${style}<script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/emoji-picker.min.js"></script><script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/chatbot-core.min.js${params}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" /></head><button class="chat-bot-activate"><span class="material-symbols-rounded">mode_comment</span><span class="material-symbols-outlined">close</span></button>${body}`;
         document.body.append(iframe);
     },
