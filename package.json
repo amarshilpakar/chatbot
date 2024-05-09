@@ -1,0 +1,15 @@
+{
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bundle.js",
+  "scripts": {
+    "build": "node bundle.js && minify ./lib/chatbot.js > ./lib/chatbot.min.js "
+  },
+  "dependencies": {
+    "concat": "1.0.3",
+    "minify": "^11.1.1"
+  },
+  "author": "Amar Shilpakar",
+  "license": "ISC"
+}
