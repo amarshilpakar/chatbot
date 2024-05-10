@@ -180,7 +180,7 @@
           right: 35px;
           bottom: 90px;
           width: 420px;
-          background: var(--xa-white-light);
+          background: var(--xa-table-light);
           border-radius: 15px;
           overflow: hidden;
           opacity: 0;
@@ -209,7 +209,7 @@
           position: absolute;
           right: 15px;
           top: 50%;
-          display: none;
+          color:var(--xa-white);
           cursor: pointer;
           transform: translateY(-50%);
         }
@@ -279,7 +279,7 @@
           position: absolute;
           bottom: 0;
           width: 100%;
-          background: var(--xa-white-light);
+          background: var(--xa-table-light);
           padding: 3px 20px;
           border-top: 1px solid var(--xa-lighter-gray);
         }
@@ -326,7 +326,8 @@
           fill:var(--xa-black);
         }
 
-        @media (max-width: 490px) {
+ 
+        @media (max-width: 600px) {
           .chat-bot-activate {
             right: 20px;
             bottom: 20px;
@@ -443,7 +444,7 @@
           color:var(--xa-black);
         }
     </style>`
-    const iframeStyle = `outline:none !important;visibility:visible !important;resize:none !important;box-shadow:none !important;overflow:visible !important;background:none !important;opacity:1 !important;filter:alpha(opacity=100) !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;-mz-opacity:1 !important;-khtml-opacity:1 !important; top:auto !important;right:20px !important;bottom:20px !important; left:auto !important; position:fixed !important; border:0 !important; min-height: 20px !important; min-width: 24px !important; max-height: 600px !important; max-width: 500px !important; padding:0 !important; margin:0 !important;-moz-transition-property:none !important;-webkit-transition-property:none !important;-o-transition-property:none !important; transition-property:none !important; transform:none !important;-webkit-transform:none !important;-ms-transform:none !important; width: 600px !important; height: 600px !important; display:block !important; z-index:1000001 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;`;
+    const iframeStyle = `outline:none !important;visibility:visible !important;resize:none !important;box-shadow:none !important;overflow:visible !important;background:none !important;opacity:1 !important;filter:alpha(opacity=100) !important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity 1}) !important;-mz-opacity:1 !important;-khtml-opacity:1 !important; top:auto;right:20px;bottom:20px; left:auto; position:fixed !important; border:0 !important; min-height: 20px !important; min-width: 24px !important; max-height: 600px; max-width: 800px; padding:0 !important; margin:0 !important;-moz-transition-property:none !important;-webkit-transition-property:none !important;-o-transition-property:none !important; transition-property:none !important; transform:none !important;-webkit-transform:none !important;-ms-transform:none !important; width: 800px; height: 600px; display:block !important; z-index:1000001 !important; background-color:transparent !important; cursor:none !important; float:none !important; border-radius:unset !important; pointer-events:auto !important; clip:auto !important; color-scheme:light !important;`;
     const emojiButton = `<button class='chat-input-action' id='emoji-button'></button>`;
     const fileUploadButton = '<span class="material-symbols-outlined upload-file" id="attach_file">attach_file</span><input hidden type="file" id="file-upload">';
     const body = `<div class="chatbot"><header><h2>Chatbot</h2>
@@ -462,20 +463,28 @@
       <span id="send-btn" class="material-symbols-rounded">send</span>
     </div>
   </div>`;
+
+  const iframeMediaStyle = '@media (max-width: 600px){#chat-bot-frame{top:0px !important;bottom:0px !important;right:0px !important;bottom:0px !important;max-height: 100vh !important;height: 100vh !important;width: 100vw !important;max-width: 100vw !important;}}';
  
 const chatPrototype = {
     activateChatBot(){
         const iframe = document.createElement('iframe');
+        const iframeStyleDiv = document.createElement('style');
+        iframeStyleDiv.innerText = iframeMediaStyle;
+        iframeStyleDiv.id = 'iframe-media';
         iframe.setAttribute('style',iframeStyle);
         iframe.id='chat-bot-frame';
         const params = this.apiKey ? `?api_key=${this.apiKey}"`: '';
-        iframe.srcdoc = `<head>${style}<script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/emoji-picker.min.js"></script><script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/chatbot-core.min.js${params}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
+        iframe.srcdoc = `<head>${style}<script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/emoji-picker.min.js"></script><script src="https://cdn.jsdelivr.net/gh/amarshilpakar/chatbot/lib/chatbot-core_1.min.js${params}"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" /><link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0" /></head><button class="chat-bot-activate"><span class="material-symbols-rounded">mode_comment</span><span class="material-symbols-outlined">close</span></button>${body}`;
         document.body.append(iframe);
+        document.head.append(iframeStyleDiv);
     },
     removeChatBot(){
       const iframe = document.getElementById('chat-bot-frame');
       iframe.remove();
+      const iframeStyleDiv = document.getElementById('iframe-media');
+      iframeStyleDiv.remove();
     }
 }
 
