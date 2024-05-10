@@ -160,7 +160,7 @@ const chatBotPrototype = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer sk-proj-4j9rLJrOCjxu9vNCeGrIT3BlbkFJvUK342C5gpB95uqmlEIs`
+                "Authorization": `Bearer `
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
@@ -200,7 +200,7 @@ function ChatBot(API_KEY, API_URL) {
     chatInput = undefined;
     sendChatBtn = undefined;
     userMessage = null;
-    API_KEY = 'sk-proj-4j9rLJrOCjxu9vNCeGrIT3BlbkFJvUK342C5gpB95uqmlEIs';
+    API_KEY = '';
     API_URL = API_URL;
     inputInitHeight = undefined;
 } 
