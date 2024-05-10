@@ -148,7 +148,7 @@ const chatBotPrototype = {
     generateChatContent(message, className){
         const element = document.createElement("li");
         element.classList.add("chat", `${className}`);
-        let iconContent = className === "outgoing" ? `<p>${message}</p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+        let iconContent = className === "outgoing" ? `<p>${message}</p>` : `<span class="material-symbols-outlined">smart_toy</span><p>${message}</p>`;
         element.innerHTML = iconContent;
         return element; 
     },
@@ -160,7 +160,7 @@ const chatBotPrototype = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${this.API_KEY}`
+                "Authorization": `Bearer sk-proj-4j9rLJrOCjxu9vNCeGrIT3BlbkFJvUK342C5gpB95uqmlEIs`
             },
             body: JSON.stringify({
                 model: "gpt-3.5-turbo",
@@ -171,8 +171,7 @@ const chatBotPrototype = {
         fetch(API_URL, requestOptions).then(res => res.json()).then(data => {
             messageElement.textContent = data.choices[0].message.content.trim();
         }).catch(() => {
-            messageElement.classList.add("error");
-            messageElement.textContent = "Oops! Something went wrong. Please try again.";
+            messageElement.textContent = "This is automated reply message.";
         }).finally(() => this.chatBox.scrollTo(0, this.chatBox.scrollHeight));
     },
     onChatInput(){
@@ -186,7 +185,7 @@ const chatBotPrototype = {
         this.chatBox.scrollTo(0, this.chatBox.scrollHeight);
         
         setTimeout(() => {
-            const chatElement = this.generateChatContent("Please wait...", "incoming");
+            const chatElement = this.generateChatContent("Incoming...", "incoming");
             this.chatBox.appendChild(chatElement);
             this.chatBox.scrollTo(0, this.chatBox.scrollHeight);
             this.callChatAPI(chatElement);
@@ -201,7 +200,7 @@ function ChatBot(API_KEY, API_URL) {
     chatInput = undefined;
     sendChatBtn = undefined;
     userMessage = null;
-    API_KEY = API_KEY;
+    API_KEY = 'sk-proj-4j9rLJrOCjxu9vNCeGrIT3BlbkFJvUK342C5gpB95uqmlEIs';
     API_URL = API_URL;
     inputInitHeight = undefined;
 } 
